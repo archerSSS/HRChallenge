@@ -66,5 +66,34 @@ namespace HRChallenge
 
             return count;
         }
+
+        public static int MakeAnagram(string a, string b)
+        {
+
+            int[] ha = new int[26];
+            int[] hb = new int[26];
+            int count = 0;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                ha[a[i] - 'a']++;
+            }
+
+            for (int i = 0; i < b.Length; i++)
+            {
+                hb[b[i] - 'a']++;
+            }
+
+            for (int i = 0; i < ha.Length; i++)
+            {
+                int diff = ha[i] - hb[i];
+                if (diff < 0) diff *= -1;
+                count += diff;
+            }
+
+            return count;
+        }
+
+
     }
 }
