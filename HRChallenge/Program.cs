@@ -10,16 +10,44 @@ namespace HRChallenge
     {
         static void Main(string[] args)
         {
-            int[] arr1 = new int[] { 3, 6, 11, 45, 1, 5, 4, 3, 15, 10};
-            int[] arr2 = new int[] { 1, 100, 20, 4, 5, 11, 15, 14, 19, 16, 5, 3 };
-            int[] arr3 = new int[] { 90, 55, 3, 16, 17, 22, 3, 1, 9, 4, 1, 10, 12, 3 };
-            int v1 = 20;
-            int v2 = 40;
-            int v3 = 16;
+            long[] mm = new long[1] { 2222222222 };
 
-            int r1 = AIUArray.CountMaximum(arr1, v1);    // 5
-            int r2 = AIUArray.CountMaximum(arr2, v2);    // 6
-            int r3 = AIUArray.CountMaximum(arr3, v3);    // 6
+            int[][] sifts = new int[][]
+            {
+                new int[]{ 29, 40, 787 },
+                new int[]{ 9, 26, 219 },
+                new int[]{ 21, 31, 214 },
+                new int[]{ 8, 22, 719 },
+                new int[]{ 15, 23, 102 },
+                new int[]{ 11, 24, 83 },
+                new int[]{ 14, 22, 321 },
+                new int[]{ 5, 22, 300 },
+                new int[]{ 11, 30, 832 },
+                new int[]{ 5, 25, 29 },
+                new int[]{ 16, 24, 577 },
+                new int[]{ 3, 10, 905 },
+                new int[]{ 15, 22, 335 },
+                new int[]{ 29, 35, 254 },
+                new int[]{ 9, 20, 20 },
+                new int[]{ 33, 34, 351 },
+                new int[]{ 30, 38, 564 },
+                new int[]{ 11, 31, 969 },
+                new int[]{ 3, 32, 11 },
+                new int[]{ 29, 35, 267 },
+                new int[]{ 4, 24, 531 },
+                new int[]{ 1, 38, 892 },
+                new int[]{ 12, 18, 825 },
+                new int[]{ 25, 32, 99 },
+                new int[]{ 3, 39, 107 },
+                new int[]{ 12, 37, 131 },
+                new int[]{ 3, 26, 640 },
+                new int[]{ 8, 39, 483 },
+                new int[]{ 8, 11, 194 },
+                new int[]{ 12, 37, 502 }
+            };
+            int n = 40;
+
+            int max = AIUArray.SiftMax(n, sifts);
         }
     }
 }

@@ -35,5 +35,55 @@ namespace HRChallenge
 
             return count;
         }
+
+        public static int SiftMax(int n, int[][] sifts)
+        {
+            int max = 0;
+            int[] tub = new int[n + 1];
+            int[] edgeLeft = new int[n + 1];
+            int[] edgeRight = new int[n + 1];
+
+            for (int i = 0; i < sifts.Length; i++)
+            {
+                edgeLeft[sifts[i][0]] += sifts[i][2];
+                edgeRight[sifts[i][1]] += sifts[i][2];
+            }
+
+            int v = 0;
+            for (int i = 0; i < tub.Length; i++)
+            {
+                v += edgeLeft[i];
+                tub[i] = v;
+                v -= edgeRight[i];
+                if (max < tub[i]) max = tub[i];
+            }
+
+            return max;
+        }
+
+        public static long SiftLongMax(int n, int[][] sifts)
+        {
+            long max = 0;
+            long[] tub = new long[n + 1];
+            long[] edgeLeft = new long[n + 1];
+            long[] edgeRight = new long[n + 1];
+
+            for (int i = 0; i < sifts.Length; i++)
+            {
+                edgeLeft[sifts[i][0]] += sifts[i][2];
+                edgeRight[sifts[i][1]] += sifts[i][2];
+            }
+
+            long v = 0;
+            for (int i = 0; i < tub.Length; i++)
+            {
+                v += edgeLeft[i];
+                tub[i] = v;
+                v -= edgeRight[i];
+                if (max < tub[i]) max = tub[i]; 
+            }
+
+            return max;
+        }
     }
 }
