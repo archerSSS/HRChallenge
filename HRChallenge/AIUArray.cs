@@ -36,6 +36,24 @@ namespace HRChallenge
             return count;
         }
 
+        public static int[] Sequenced(int[] arr, int size)
+        {
+            int[] seq = new int[1];
+            
+            int min = arr.Min();
+            int max = arr.Max();
+            int[] a = new int[max];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (min > arr[i]) min = arr[i];
+                if (max < arr[i]) min = arr[i];
+                a[arr[i]]++;
+            }
+
+
+            return seq;
+        }
+
         public static int SiftMax(int n, int[][] sifts)
         {
             int max = 0;
