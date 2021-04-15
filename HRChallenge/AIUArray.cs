@@ -36,7 +36,46 @@ namespace HRChallenge
             return count;
         }
 
-        public static int[] Sequenced(int[] arr, int size)
+        public static string IsStringValid(string s)
+        {
+            int[] line = new int[26];
+            int max = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                line[s[i] - 'a']++;
+                if (max < line[s[i] - 'a']) max = line[s[i] - 'a'];
+            }
+
+            int[] counter = new int[max + 1];
+            max = 0;
+            int indexOfMax = 0;
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line[i] != 0)
+                {
+                    counter[line[i]]++;
+                    if (max < counter[line[i]])
+                    {
+                        max = counter[line[i]];
+                        indexOfMax = line[i];
+                    }
+                }
+            }
+
+            int limit = 1;
+            for (int i = 0; i < counter.Length; i++)
+            {
+                if (i != indexOfMax && counter[i] != 0)
+                {
+                    limit--;
+                    if (limit < 0) return "NO";
+                }
+            }
+
+            return "YES";
+        }
+
+        public static int[] Sequence(int[] arr, int size)
         {
             int[] seq = new int[1];
             
