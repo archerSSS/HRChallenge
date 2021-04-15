@@ -10,7 +10,7 @@ namespace HRChallenge
     {
         static void Main(string[] args)
         {
-            string s = "aabbccddeefghi";
+            string s = "xxxaabbccrry";
 
             string vd = AIUArray.IsStringValid(s);
         }

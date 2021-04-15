@@ -61,14 +61,24 @@ namespace HRChallenge
                     }
                 }
             }
-
-            int limit = 1;
-            for (int i = 0; i < counter.Length; i++)
+            
+            for (int i = 1; i < counter.Length; i++)
             {
                 if (i != indexOfMax && counter[i] != 0)
                 {
+                    counter[i]--;
+                    counter[i - 1]++;
+                    break;
+                }
+            }
+
+            int limit = 1;
+            for (int i = 1; i < counter.Length; i++)
+            {
+                if (counter[i] != 0)
+                {
+                    if (limit == 0) return "NO";
                     limit--;
-                    if (limit < 0) return "NO";
                 }
             }
 
