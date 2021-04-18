@@ -85,6 +85,30 @@ namespace HRChallenge
             return "YES";
         }
 
+        public static int ActivityNotifications(int[] expenditure, int d)
+        {
+            int notif = 0;
+            int[] sortedPeriod = new int[expenditure.Length];
+            Array.Copy(expenditure, 0, sortedPeriod, 0, expenditure.Length);
+            Array.Sort(sortedPeriod);
+
+            int a = d / 2;
+            int b = (d - 1) / 2;
+
+            for (int i = d; i < expenditure.Length; i++)
+            {
+                int j = i - d;
+                float m = ((float)sortedPeriod[j + a] + (float)sortedPeriod[j + b]) / 2;
+
+                if (expenditure[i] >= m * 2)
+                {
+                    notif++;
+                }
+            }
+
+            return notif;
+        }
+
         public static int[] Sequence(int[] arr, int size)
         {
             int[] seq = new int[1];
