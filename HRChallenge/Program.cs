@@ -8,31 +8,41 @@ namespace HRChallenge
 {
     class Program
     {
-
+        static int[] sortedPeriod;
         static void Main(string[] args)
         {
-            int[] expenditure = new int[] { 2, 3, 4, 2, 3, 6, 8, 4, 5 };
-            int d = 5;
-            
-            int notif = 0;
-            int[] sortedPeriod = new int[expenditure.Length];
-            Array.Copy(expenditure, 0, sortedPeriod, 0, expenditure.Length);
-            Array.Sort(sortedPeriod);
+            int[] expenditure = new int[] { 10, 20, 30, 40, 50 };
+            int d = 3;
 
-            int a = d / 2;
-            int b = (d - 1) / 2;
-
-            for (int i = d; i < expenditure.Length; i++)
-            {
-                int j = i - d;
-                float m = ((float)sortedPeriod[j + a] + (float)sortedPeriod[j + b]) / 2;
-
-                if (expenditure[i] >= m * 2)
-                {
-                    notif++;
-                }
-            }
+            FF(expenditure);
         }
 
+        static void FF(int[] ar)
+        {
+            ar[0] = 2;
+        }
+
+        static void Shift()
+        {
+            for (int i = 0; i < sortedPeriod.Length - 1; i++)
+            {
+                sortedPeriod[i] = sortedPeriod[i + 1];
+            }
+            sortedPeriod[sortedPeriod.Length - 1] = 0;
+        }
+
+        static void PopSort()
+        {
+            for (int i = sortedPeriod.Length - 1; i > 0; i--)
+            {
+                if (sortedPeriod[i] < sortedPeriod[i - 1])
+                {
+                    sortedPeriod[i] += sortedPeriod[i - 1];
+                    sortedPeriod[i - 1] = sortedPeriod[i] - sortedPeriod[i - 1];
+                    sortedPeriod[i] -= sortedPeriod[i - 1];
+                }
+                else break;
+            }
+        }
     }
 }

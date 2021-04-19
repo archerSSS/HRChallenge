@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AIUArray.cs" />
     <Compile Include="AIUComparator.cs" />
+    <Compile Include="AIUMath.cs" />
     <Compile Include="Anagramer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

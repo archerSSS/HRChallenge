@@ -109,6 +109,7 @@ namespace HRChallenge
             return notif;
         }
 
+
         public static int[] Sequence(int[] arr, int size)
         {
             int[] seq = new int[1];
