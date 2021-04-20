@@ -109,6 +109,22 @@ namespace HRChallenge
             return notif;
         }
 
+        static int MaxMin(int k, int[] arr)
+        {
+            int mina = 0;
+            int minb = k - 1;
+            Array.Sort(arr);
+            for (int i = 0; i + k - 1 < arr.Length; i++)
+            {
+                if (arr[i + k - 1] - arr[i] < arr[minb] - arr[mina])
+                {
+                    mina = i;
+                    minb = i + k - 1;
+                }
+            }
+
+            return arr[minb] - arr[mina];
+        }
 
         public static int[] Sequence(int[] arr, int size)
         {
