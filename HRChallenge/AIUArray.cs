@@ -109,6 +109,44 @@ namespace HRChallenge
             return notif;
         }
 
+        static int MaxMana(int rep, int[][] bttls)
+        {
+            int mana = 0;
+            List<int> impl = new List<int>();
+            List<int> nimpl = new List<int>();
+            for (int i = 0; i < bttls.Length; i++)
+            {
+                if (bttls[i][1] == 1)
+                {
+                    impl.Add(bttls[i][0]);
+                }
+                else nimpl.Add(bttls[i][0]);
+            }
+
+            int[] imp = impl.ToArray();
+            int[] nimp = nimpl.ToArray();
+            Array.Sort(imp);
+            for (int i = imp.Length - 1; i >= 0; i--)
+            {
+                if (rep > 0)
+                {
+                    rep--;
+                    mana += imp[i];
+                }
+                else
+                {
+                    mana -= imp[i];
+                }
+            }
+
+            for (int i = 0; i < nimp.Length; i++)
+            {
+                mana += nimp[i];
+            }
+
+            return mana;
+        }
+
         static int MaxMin(int k, int[] arr)
         {
             int mina = 0;
