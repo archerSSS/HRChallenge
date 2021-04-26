@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,13 @@ namespace HRChallenge
 {
     class Program
     {
+
+        
+
         static int[] sortedPeriod;
         static void Main(string[] args)
         {
-            int[] expenditure = new int[] { 10, 20, 30, 40, 50 };
-            int d = 3;
-
-            FF(expenditure);
+            int i = Int32.MaxValue;
         }
 
         static void FF(int[] ar)

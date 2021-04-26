@@ -231,5 +231,96 @@ namespace HRChallenge
 
             return max;
         }
+
+        public static long CountTripletsB(List<long> arr, long r)
+        {
+            long count = 0;
+            long[] h = new long[arr.Max() + 1];
+            foreach (long l in arr)
+            {
+                h[l]++;
+            }
+
+            for (int i = 0; i * r * r < h.Length; i++)
+            {
+                if (r == 1)
+                {
+                    int a = 0;
+                    for (int j = 1; j <= h[i] - 2; j++)
+                    {
+                        a += j;
+                    }
+                    count += a;
+                }
+                else count += h[i] * h[i * r] * h[i * r * r];
+            }
+
+            return count;
+        }
+
+        public static List<int> FreqQuery(List<List<int>> queries)
+        {
+            int tableSize = 0;
+            for (int i = 0; i < queries.Count; i++)
+            {
+                if ((queries[i][0] == 1 || queries[i][0] == 2) && tableSize < queries[i][1])
+                {
+                    tableSize = queries[i][1];
+                }
+            }
+
+            int[] table = new int[tableSize + 1];
+            int[] counter = new int[tableSize + 1];
+            List<int> list = new List<int>();
+            for (int i = 0; i < queries.Count; i++)
+            {
+                int v = queries[i][1];
+
+                if (queries[i][0] == 1)
+                {
+                    int c = table[v];
+                    table[v]++;
+
+                    counter[c]--;
+                    counter[c + 1]++;
+                }
+                else if (queries[i][0] == 2 && table[v] != 0)
+                {
+                    int c = table[v];
+                    table[v]--;
+
+                    counter[c]--;
+                    counter[c - 1]++;
+                }
+                else if (queries[i][0] == 3)
+                {
+                    if (v <= tableSize + 1 && counter[v] > 0)
+                    {
+                        list.Add(1);
+                    }
+                    else list.Add(0);
+                }
+            }
+            return list;
+        }
+
+        public static int CountTriplets(long r, List<long> list)
+        {
+            int count = 0;
+            long[] values = new long[list.Max()];
+            List<long> indexer = new List<long>();
+            foreach (long l in list)
+            {
+                if (values[l] == 0) indexer.Add(l);
+                values[l]++;
+            }
+
+            foreach (long l in indexer)
+            {
+                
+            }
+
+            return count;
+        }
     }
 }
