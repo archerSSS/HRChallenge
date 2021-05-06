@@ -15,7 +15,37 @@ namespace HRChallenge
         static int[] sortedPeriod;
         static void Main(string[] args)
         {
-            int i = Int32.MaxValue;
+            int[] nxs = new int[]
+            {
+                1, 5, 3, 3, 4, 7, 4
+            };
+            /*List<int>[] list = new List<int>[nxs.Length * 3];
+            
+
+            for (int i = 0; i < nxs.Length; i++)
+            {
+                int v = nxs[i];
+                if (list[v] == null)
+                {
+                    list[v] = new List<int>();
+                }
+                list[v].Add(i);
+            }
+
+            int a = 0;
+            Array.Sort(nxs);
+            for (int i = 0; i < nxs.Length; i++)
+            {
+                int v = nxs[i];
+                a = list[v][0];
+                list[v].Remove(a);
+            }*/
+            int money = 4;
+            int[] ar = new int[]
+            {
+                2, 2, 4, 3
+            };
+            AIUArray.WhatFlavors(ar, money);
         }
 
         static void FF(int[] ar)

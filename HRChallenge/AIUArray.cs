@@ -8,6 +8,8 @@ namespace HRChallenge
 {
     class AIUArray
     {
+        // Count Maximum
+        #region
         public static int CountMaximum(int[] arr, int v)
         {
             int count = 0;
@@ -35,7 +37,10 @@ namespace HRChallenge
 
             return count;
         }
+        #endregion
 
+        // Is String Valid
+        #region
         public static string IsStringValid(string s)
         {
             int[] line = new int[26];
@@ -84,7 +89,9 @@ namespace HRChallenge
 
             return "YES";
         }
+        #endregion
 
+        #region
         public static int ActivityNotifications(int[] expenditure, int d)
         {
             int notif = 0;
@@ -108,7 +115,9 @@ namespace HRChallenge
 
             return notif;
         }
+        #endregion
 
+        #region
         static int MaxMana(int rep, int[][] bttls)
         {
             int mana = 0;
@@ -146,7 +155,9 @@ namespace HRChallenge
 
             return mana;
         }
+        #endregion
 
+        #region
         static int MaxMin(int k, int[] arr)
         {
             int mina = 0;
@@ -163,7 +174,9 @@ namespace HRChallenge
 
             return arr[minb] - arr[mina];
         }
+        #endregion
 
+        #region
         public static int[] Sequence(int[] arr, int size)
         {
             int[] seq = new int[1];
@@ -181,7 +194,9 @@ namespace HRChallenge
 
             return seq;
         }
+        #endregion
 
+        #region
         public static int SiftMax(int n, int[][] sifts)
         {
             int max = 0;
@@ -206,7 +221,9 @@ namespace HRChallenge
 
             return max;
         }
+        #endregion
 
+        #region
         public static long SiftLongMax(int n, int[][] sifts)
         {
             long max = 0;
@@ -231,7 +248,9 @@ namespace HRChallenge
 
             return max;
         }
+        #endregion
 
+        #region
         public static long CountTripletsB(List<long> arr, long r)
         {
             long count = 0;
@@ -257,7 +276,10 @@ namespace HRChallenge
 
             return count;
         }
+        #endregion
 
+
+        #region
         public static List<int> FreqQuery(List<List<int>> queries)
         {
             int tableSize = 0;
@@ -303,7 +325,9 @@ namespace HRChallenge
             }
             return list;
         }
+        #endregion
 
+        #region
         public static int CountTriplets(long r, List<long> list)
         {
             int count = 0;
@@ -322,5 +346,71 @@ namespace HRChallenge
 
             return count;
         }
+        #endregion
+
+        #region
+        public static void WhatFlavors(int[] cost, int money)
+        {
+            List<int>[] table = new List<int>[cost.Length * 3];
+            for (int i = 0; i < table.Length; i++)
+            {
+                table[i] = new List<int>();
+            }
+
+            for (int i = 0; i < cost.Length; i++)
+            {
+                int key = cost[i];
+                if (table[key] == null)
+                {
+                    table[key] = new List<int>();
+                }
+                table[key].Add(i);
+            }
+
+            Array.Sort(cost);
+            int a = 0;
+            int b = cost.Length - 1;
+            int ic1 = table[cost[a]][0];
+            int ic2 = table[cost[b]][0];
+            int max = 0;
+
+            while (b - a != -1 && b - a != 0)
+            {
+                if (cost[a] + cost[b] <= money)
+                {
+                    if (cost[a] + cost[b] > max)
+                    {
+                        max = cost[a] + cost[b];
+                        ic1 = table[cost[a]][0];
+                        table[cost[a]].Remove(ic1);
+                        ic2 = table[cost[b]][0];
+                        
+                        if (cost[a] + cost[b] == money)
+                        {
+                            break;
+                        }
+                    }
+                    a++;
+                }
+                else
+                {
+                    b--;
+                    table[cost[b]].Remove(ic2);
+                }
+            }
+
+            if (ic1 > ic2)
+            {
+                Console.Write((ic2 + 1) + " ");
+                Console.WriteLine((ic1 + 1));
+            }
+            else
+            {
+                Console.Write((ic1 + 1) + " ");
+                Console.WriteLine((ic2 + 1));
+            }
+            
+        }
+        #endregion
     }
 }
