@@ -348,44 +348,120 @@ namespace HRChallenge
         }
         #endregion
 
+        public static int[] MaxRangeSets(int[] arr1, int[] arr2)
+        {
+            int m1 = arr1.Max();
+            int m2 = arr2.Max();
+            int[] arr3;
+            if (m1 <= m2) arr3 = new int[m1 + 1];
+            else arr3 = new int[m2 + 1];
+
+            int min = m1 + m2;
+            int max = 0;
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                int a = arr1[i];
+                if (a < arr3.Length) arr3[a]++;
+            }
+            
+            for (int i = 0; i < arr2.Length; i++)
+            {
+                int b = arr2[i];
+                if (b < arr3.Length) arr3[b]++; 
+            }
+
+            for (int i = 0; i < arr3.Length; i++)
+            {
+                if (arr3[i] > 1 && i < min) min = i;
+                if (arr3[i] > 1 && i > max) max = i; 
+            }
+
+            int[] range = new int[] { min, max };
+            return range;
+        }
+
         #region
+        //static List<int>[] table;
+        static DictionaryCell[] table;
+        /*max = cost[a] + cost[b];
+                                ic1 = table[cost[a]][0];
+                                table[cost[a]].Remove(ic1);
+                                ic2 = table[cost[b]][0];*/
+        /*if (table[av].list[0] != av)
+                            ic1 = FindIndex(av);
+                        else ic1 = table[av].list[0];
+                        table[av].list.Remove(ic1);*/
+        /*if (table[bv].list[0] != bv)
+            ic1 = FindIndex(bv);
+        else ic2 = table[bv].list[0];*/
+        
         public static void WhatFlavors(int[] cost, int money)
         {
-            List<int>[] table = new List<int>[cost.Length * 3];
-            for (int i = 0; i < table.Length; i++)
-            {
-                table[i] = new List<int>();
-            }
+            //table = new List<int>[cost.Length * 3];
+            table = new DictionaryCell[cost.Length * 3];
+            DictionaryCell[] t = table;
 
             for (int i = 0; i < cost.Length; i++)
             {
-                int key = cost[i];
+                int key = cost[i] % table.Length;
                 if (table[key] == null)
                 {
-                    table[key] = new List<int>();
+                    table[key] = new DictionaryCell(key);
+                    table[key].list.Add(i);
                 }
-                table[key].Add(i);
+                else
+                {
+                    int k = key;
+                    for (int j = 0; j < table.Length; j++)
+                    {
+                        if (j + k >= table.Length)
+                        {
+                            k = 0;
+                        }
+
+                        if (table[j + k] == null)
+                        {
+                            table[j + k] = new DictionaryCell(j + k);
+                            table[j + k].list.Add(i);
+                            break;
+                        }
+                    }
+                }
+                
             }
 
             Array.Sort(cost);
             int a = 0;
             int b = cost.Length - 1;
-            int ic1 = table[cost[a]][0];
-            int ic2 = table[cost[b]][0];
+            int ic1 = -1;
+            int ic2 = -1;
+            /*int ic1 = table[cost[a] % table.Length].list[0];
+            int ic2 = table[cost[b] % table.Length].list[0];
+            if (cost[a] % table.Length != table[cost[a] % table.Length].id)
+                ic1 = FindIndex(cost[a]);
+            if (cost[b] % table.Length != table[cost[b] % table.Length].id)
+                ic2 = FindIndex(cost[b]);*/
+
+            //table[cost[a] % table.Length].list.Remove(ic1);
+            //table[cost[b] % table.Length].list.Remove(ic2);
+
             int max = 0;
 
             while (b - a != -1 && b - a != 0)
             {
-                if (cost[a] + cost[b] <= money)
+                int av = cost[a] % table.Length;
+                int bv = cost[b] % table.Length;
+
+                if (av + bv <= money)
                 {
-                    if (cost[a] + cost[b] > max)
+                    if (av + bv > max)
                     {
-                        max = cost[a] + cost[b];
-                        ic1 = table[cost[a]][0];
-                        table[cost[a]].Remove(ic1);
-                        ic2 = table[cost[b]][0];
-                        
-                        if (cost[a] + cost[b] == money)
+                        max = av + bv;
+
+                        ic1 = FindIndex(av);
+                        ic2 = FindIndex(bv);
+
+                        if (av + bv == money)
                         {
                             break;
                         }
@@ -395,8 +471,9 @@ namespace HRChallenge
                 else
                 {
                     b--;
-                    table[cost[b]].Remove(ic2);
+                    //table[bv].list.Remove(ic2);
                 }
+                t = table;
             }
 
             if (ic1 > ic2)
@@ -411,6 +488,42 @@ namespace HRChallenge
             }
             
         }
+
+        static int FindIndex(int v)
+        {
+            for (int i = table.Length; i > -1; i--)
+            {
+                if (v > table.Length - 1)
+                {
+                    v = 0;
+                }
+
+                if (table[v] != null && table[v].id == v)
+                {
+                    int nx = table[v].list[0];
+                    //table[v].list.Remove(nx);
+                    return nx;
+                }
+
+                v++;
+            }
+
+            return -1;
+        }
+
+        class DictionaryCell
+        {
+            public int id;
+            public List<int> list;
+
+            public DictionaryCell(int i)
+            {
+                id = i;
+                list = new List<int>();
+            }
+        }
         #endregion
+
+
     }
 }
